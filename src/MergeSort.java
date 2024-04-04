@@ -123,11 +123,7 @@ public class MergeSort implements Sorter {
   
 
 
-
-  private static <T> void merge (T[] values, Comparator<? super T> order, int left, int right, int mid){
-    //@SuppressWarnings("unchecked")
-    T[] temparr = Arrays.copyOf(values, values.length);
-    //(T[]) Array.newInstance(values.getClass(), values.length); 
+   //(T[]) Array.newInstance(values.getClass(), values.length); 
     //for (int i = left; i < right; i++){
       //temparr[i] = values[i];
     //}
@@ -136,6 +132,10 @@ public class MergeSort implements Sorter {
     //int mid = left + (right - left) / 2;
     //int midtracker = mid - left;
     //int pos = 0;
+
+
+  public <T> void merge (T[] values, Comparator<? super T> order, int left, int right, int mid){
+    T[] temparr = Arrays.copyOf(values, values.length);
     int lb = left;
     int midpoint = mid + 1;
     int pos = lb;
@@ -216,7 +216,7 @@ public class MergeSort implements Sorter {
   */
 
 
-  private static <T> void mergeSort(T[] values, Comparator<? super T> order, int left, int right){
+  public <T> void mergeSort(T[] values, Comparator<? super T> order, int left, int right){
     //T[] newarr = (T[]) Array.newInstance(values.getClass(), values.length);
     //if (left == right){
       //return;
