@@ -1,15 +1,17 @@
-/**
+
+  /**
  * Tests of Quicksort.
  */
-public class QuicksortTester extends SortTester {
+public class TrappAlyssaSortTester extends SortTester {
 
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
 
-  public QuicksortTester() {
+  public TrappAlyssaSortTester() {
     super();
-    this.sorter = Quicksort.SORTER;
-  } // QuicksortTester()
+    this.sorter = TrappAlyssaSort.SORTER;
+  } // TrappAlyssaTester()
 
 } // class QuicksortTester
+

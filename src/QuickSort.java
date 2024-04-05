@@ -7,7 +7,7 @@ import java.util.Comparator;
  * I also modified code from the QuickSort lab which I worked on with Medhashree Adhikari
  */
 
-public class Quicksort implements Sorter {
+public class QuickSort implements Sorter {
 
   // +--------+------------------------------------------------------
   // | Fields |
@@ -16,7 +16,7 @@ public class Quicksort implements Sorter {
   /**
    * The one sorter you can access.
    */
-  public static Sorter SORTER = new Quicksort();
+  public static Sorter SORTER = new QuickSort();
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -25,28 +25,12 @@ public class Quicksort implements Sorter {
   /**
    * Create a sorter.
    */
-  Quicksort() {
+  QuickSort() {
   } // Quicksort()
 
   // +---------+-----------------------------------------------------
   // | Methods |
   // +---------+
-
-   /**
-   * Swaps the values stored at index i and index j within an array
-   */
-
-   public static <T> T[] swap(T[] arr, int i, int j) {
-    // stores the value at index i in temp
-    T temp = arr[i];
-    // sets the value at index i to the value at index j
-    arr[i] = arr[j];
-    // sets the value of index j to temp which is the original value stored at index
-    arr[j] = temp;
-    // returns the new array after it's been swapped
-    return arr;
-  } // swap (T[], int, int)
-
 
   @Override
   public <T> void sort(T[] values, Comparator<? super T> order) {
@@ -58,63 +42,52 @@ public class Quicksort implements Sorter {
    * Sort the subarray of T given by [lb..ub) in place using the Quicksort algorithm.
    */
     static <T> void quicksort(T[] values, Comparator<? super T> order, int lb, int ub) {
-
-      /*
-       * base case: 
-       *   when lb == ub
-       *   when arr.length == 0
-       * recursive:
-       *   find pivot
-       *   sort less than/greater than pivot
-       *   1. sort left side (less than pivot until lb)
-       *       --> unless smallest value
-       *   2. sort right side (greater than pivot until ub) 
-       *      --> unless greatest value
-       */
       // base case: if lb == ub or if there is only one value in the array, return
       if((lb == ub) || (values.length == 0)) {
         return;
       }
-      //intializes left to be lb, right to be up, and pivot to be partition
+      //intializes left to be lb, right to be ub, and pivot to be partition
           int left = lb;
           int right = ub;
           int pivot = partition(values, order, left, right);
-          //stores the swapped value array in a newValues array
-          T[] newValues = swap(values, left, pivot);
-          //increments left
-          left++; 
+          // stores the swapped value array in a newValues array
+          T[] newValues = SwapSort.swap(values, left, pivot);
+          // if the value at left is not equal to the value at pivot, then increment the left
+          if(values[left] != values[pivot]){
+            left++;
+          } // if
           // loops while left is less than right
           while(left < right){
-            // if element in index i is less than element in pivot,
-            // then comparator will return 1
-            // if 1 is returned,
-            
-            if(order.compare(newValues[left], newValues[lb]) == 1) {
-              // swap end value and cur value
-              swap(newValues, left, right);
-              right--; // shift right towards left
-            } else {
+            // if the element in the left index is greater than the element in the lb index, 
+            //then swap the values at the indexes and decrement right
+            if(order.compare(newValues[left], newValues[lb]) > 0) {
+              SwapSort.swap(newValues, left, right);
+              right--; 
+            } // if
+            // otherwise increment left 
+            else {
               left++;
-            }
-          }
+            } // else
+          } // while
   
-          // put pivot in correct place
-          if(order.compare(newValues[lb], newValues[left]) == 1) {
+          // puts pivot in correct place
+          if(order.compare(newValues[lb], newValues[left]) > 0) {
             pivot = left;
-            swap(newValues, pivot, lb);
-          } else {
+            SwapSort.swap(newValues, pivot, lb);
+          } // if 
+          else {
             pivot = left - 1;
-            swap(newValues, pivot, lb);
-          }
+            SwapSort.swap(newValues, pivot, lb);
+          } // else
   
           // left section of the array
           if(pivot != lb) {
             quicksort(newValues, order, lb, pivot - 1);
-          }
+          } // if
   
           if(pivot != ub) {
             quicksort(newValues, order, pivot + 1, ub);
-          }
+          } // if
     } // quicksort(T[], Comparator<? super T>, lb, ub)
   
     /**
@@ -133,9 +106,9 @@ public class Quicksort implements Sorter {
      */
   
     public static <T> int partition(T[] arr, Comparator<? super T> order, int lb, int ub) {
-      //finds the midpoint for the pivot's index
+      // finds the midpoint for the pivot's index
       int pivotLoc = (lb + ub) / 2;
-      //returns the pivot's index
+      // returns the pivot's index
       return pivotLoc;
     } // partition(T[], Comparator<? super T>, lb, ub)
   } // class Quicksort

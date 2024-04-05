@@ -1,9 +1,6 @@
-import java.lang.reflect.Array;
-import java.util.Comparator;
-import java.util.Arrays;
 
 /**
- * Tests of Insertsort.
+ * Tests of Insertionsort.
  */
 public class InsertionSortTester extends SortTester {
 
@@ -13,7 +10,7 @@ public class InsertionSortTester extends SortTester {
 
   public InsertionSortTester() {
     super();
-    this.sorter = Quicksort.SORTER;
-  } // QuicksortTester()
+    this.sorter = InsertionSort.SORTER;
+  } // InsertionSortTester()
 
 } // class QuicksortTester
